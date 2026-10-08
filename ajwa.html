@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ajwa – Dry Fruits & Restaurant</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f7f3ea;--ink:#1d2a1a;--card:#fffdf7;--line:#e3dbc6;--green:#27401f;--gold:#c8902b;--brown:#4a2e1b;--mut:#6b6b57;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131a11;--ink:#f1ead8;--card:#1c2619;--line:#2f3d2a;--green:#0d150b;--gold:#e0ab45;--brown:#e0c9a8;--mut:#a3a48e}}
+:root[data-theme="dark"]{--bg:#131a11;--ink:#f1ead8;--card:#1c2619;--line:#2f3d2a;--green:#0d150b;--gold:#e0ab45;--brown:#e0c9a8;--mut:#a3a48e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Karla,system-ui,sans-serif;line-height:1.5}
+h1,h2,h3{font-family:Marcellus,Georgia,serif;font-weight:400;margin:0}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--green);color:#f1ead8}
+.logo{font-family:Marcellus,Georgia,serif;font-size:26px;letter-spacing:.06em}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.cartbtn{background:var(--gold);color:#1d1a0f;border:0;border-radius:99px;padding:8px 16px;font-weight:700}
+.hero{background:var(--green);color:#f1ead8;padding:48px 20px 56px;text-align:center}
+.hero h1{font-size:clamp(48px,12vw,104px);letter-spacing:.08em;line-height:1}
+.hero p{max-width:34ch;margin:14px auto 28px;color:#d9d3bd;font-size:18px}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;margin:0 auto}
+.door{border:1px solid #c8902b88;background:#ffffff0f;color:#f1ead8;border-radius:14px;padding:18px 10px;text-align:center}
+.door span{display:block;font-size:34px}
+.door b{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:20px}
+.door[aria-selected=true]{background:var(--gold);color:#1d1a0f;border-color:var(--gold)}
+main{max-width:980px;margin:0 auto;padding:28px 16px 90px}
+.intro{color:var(--mut);margin:6px 0 20px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px}
+.chip{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 14px}
+.chip[aria-pressed=true]{background:var(--green);color:#f1ead8;border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.item .ico{font-size:42px}
+.item h3{font-size:19px}
+.item p{margin:0;color:var(--mut);font-size:14px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font-weight:700;color:var(--brown)}
+.add{background:var(--green);color:#f1ead8;border:0;border-radius:8px;padding:7px 14px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.drawer{position:fixed;inset:0;z-index:10;display:none}
+.drawer.open{display:block}
+.scrim{position:absolute;inset:0;background:#0008}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);background:var(--bg);padding:18px;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:8px 0}
+label{display:block;font-size:14px;font-weight:600;margin-top:8px}
+input,textarea,select{width:100%;font:inherit;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 4px;font-size:14px}
+.seg button[aria-pressed=true]{background:var(--green);color:#f1ead8}
+.total{display:flex;justify-content:space-between;font-size:20px;font-family:Marcellus,Georgia,serif}
+.place{background:var(--gold);color:#1d1a0f;border:0;border-radius:10px;padding:13px;font-weight:700;font-size:16px}
+.err{color:#c0392b;font-size:14px;min-height:20px}
+.done{text-align:center;padding:30px 6px}.done .ico{font-size:56px}
+footer{text-align:center;color:var(--mut);padding:24px;font-size:14px}
+.hero{position:relative;overflow:hidden}.hero>*:not(.float){position:relative;z-index:1}
+.float{position:absolute;inset:0;pointer-events:none}
+.fl{position:absolute;bottom:-90px;opacity:.3;animation:rise linear infinite}
+.hero h1{background:linear-gradient(100deg,#f1ead8 30%,#e0ab45 50%,#f1ead8 70%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:open 1.4s ease-out,shine 4s linear infinite}
+.door{transition:transform .2s,background .2s}.door:hover{transform:translateY(-4px)}
+.door span{display:inline-block;animation:bob 3s ease-in-out infinite}
+.door[aria-selected=true]{animation:glow 2.4s infinite}
+.enter .item{animation:in .6s both cubic-bezier(.2,.8,.2,1);animation-delay:calc(var(--i)*60ms)}
+.item{transition:transform .25s,box-shadow .25s}.item:hover{transform:translateY(-6px);box-shadow:0 12px 24px #0003}
+.art{height:130px;display:grid;place-items:center;animation:bob 3.4s ease-in-out infinite;animation-delay:calc(var(--i)*-.4s)}
+.art svg{width:124px;height:124px;transition:transform .3s}.item:hover .art svg{transform:scale(1.15) rotate(-6deg)}
+.steam path{animation:steam 2.4s ease-in-out infinite}.steam path:nth-child(2){animation-delay:-1.2s}
+.bub{animation:rise2 2s infinite}
+.add{transition:transform .15s}.add:active{transform:scale(.9)}
+.cartbtn.bump{animation:bump .4s}
+.panel{animation:slide .35s cubic-bezier(.2,.8,.2,1)}.scrim{animation:fade .3s}
+.done .ico{display:inline-block;animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes rise{to{transform:translateY(-560px) rotate(360deg)}}
+@keyframes shine{to{background-position:-200% 0}}
+@keyframes open{from{letter-spacing:.4em;opacity:0}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@keyframes glow{50%{box-shadow:0 0 22px #e0ab45aa}}
+@keyframes in{from{opacity:0;transform:translateY(24px) scale(.96)}}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}50%{opacity:.8}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes rise2{to{transform:translateY(-24px);opacity:0}}
+@keyframes bump{40%{transform:scale(1.2)}}
+@keyframes slide{from{transform:translateX(100%)}}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{transform:scale(0) rotate(-90deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<header class="top"><div class="logo">AJWA</div><button class="cartbtn" id="openCart">Cart (<span id="cnt">0</span>)</button></header>
+<section class="hero">
+<div class="float" id="float"></div>
+<h1>Ajwa</h1>
+<p>Premium dry fruits to take home. Fresh meals to eat now.</p>
+<div class="doors" role="tablist">
+<button class="door" role="tab" data-s="shop" aria-selected="true"><span>🌴</span><b>Dry Fruits</b></button>
+<button class="door" role="tab" data-s="food" aria-selected="false"><span>🍽️</span><b>Restaurant</b></button>
+</div></section>
+<main>
+<h2 id="title"></h2><p class="intro" id="intro"></p>
+<div class="chips" id="chips"></div>
+<div class="grid" id="grid"></div>
+</main>
+<footer>Ajwa · Open daily 9 am – 11 pm</footer>
+
+<div class="drawer" id="drawer"><div class="scrim" id="scrim"></div>
+<div class="panel" role="dialog" aria-label="Your order" id="panel"></div></div>
+
+<script>
+const DATA={
+shop:{title:"Dry fruit shop",intro:"Sold by weight. Each item is per 250 g pack.",items:[
+["Ajwa Dates","🌴","Soft, dark dates from Madinah",14,"Dates"],
+["Medjool Dates","🌴","Large, caramel-sweet and juicy",12,"Dates"],
+["Sukkari Dates","🌴","Golden, crisp and honey-like",9,"Dates"],
+["Almonds","🌰","Raw California almonds",8,"Nuts"],
+["Cashews","🥜","Whole, creamy and lightly salted",10,"Nuts"],
+["Pistachios","🥜","Roasted Iranian pistachios",13,"Nuts"],
+["Walnuts","🌰","Light halves, fresh crunch",9,"Nuts"],
+["Dried Apricots","🍑","Sun-dried, no added sugar",7,"Dried fruit"],
+["Figs","🟣","Soft Turkish dried figs",8,"Dried fruit"],
+["Raisins","🍇","Golden seedless raisins",5,"Dried fruit"],
+["Gift Box","🎁","Mixed dates and nuts, 1 kg",39,"Gifts"]]},
+food:{title:"Restaurant menu",intro:"Cooked fresh to order. Ready in about 25 minutes.",items:[
+["Lamb Mandi","🍖","Slow-cooked lamb on smoky rice",18,"Mains"],
+["Chicken Kabsa","🍗","Spiced rice, roasted chicken, tomato sauce",14,"Mains"],
+["Mixed Grill","🍢","Kebab, tikka and lamb chops",21,"Mains"],
+["Falafel Wrap","🌯","Crisp falafel, tahini, pickles",7,"Quick bites"],
+["Shawarma Plate","🥙","Chicken shawarma, garlic sauce, fries",11,"Quick bites"],
+["Hummus & Bread","🫓","Creamy hummus with warm pita",6,"Starters"],
+["Lentil Soup","🍲","Red lentil soup with lemon",5,"Starters"],
+["Date Pudding","🍮","Warm Ajwa date cake, toffee sauce",7,"Desserts"],
+["Kunafa","🍰","Cheese kunafa with syrup and pistachio",8,"Desserts"],
+["Arabic Coffee","☕","Cardamom coffee served with dates",4,"Drinks"],
+["Mint Lemonade","🍋","Fresh and cold",4,"Drinks"]]}};
+const WA="918917863640";let waUrl="";
+let sec="shop",cat="All",cart={},mode="Pickup",step="cart";
+const $=id=>document.getElementById(id),money=n=>"$"+n.toFixed(2);
+const key=(s,i)=>s+":"+i;
+let fresh=true;
+const S=x=>`<svg viewBox="0 0 100 100" aria-hidden="true">${x}</svg>`;
+const GR={dk:["#6a4636","#190b06"],br:["#d9955a","#6b3516"],go:["#f6d680","#b97d1f"],al:["#e6b87e","#97622c"],ca:["#f9e8c0","#c9a15f"],pg:["#c9e37c","#5f8a24"],ps:["#f3e7c6","#bfa874"],wa:["#d9ae7a","#7a4e26"],or:["#ffd582","#e07a14"],pu:["#a566ae","#2f0f38"],rs:["#94527a","#2a0f20"],gr:["#58854000","#14260f"],gd:["#ffe58f","#b87d12"],rd:["#ee7560","#8e1f12"],cr:["#fff6df","#e3c78f"],pl:["#ffffff","#cfc7b0"],ri:["#fff3be","#e0b556"],rb:["#f4b868","#b8661f"],me:["#c4724a","#5a2411"],le:["#fff9a8","#e6b816"],gl:["#ffffff","#bcd9c0"],so:["#f9b050","#c2601a"],ch:["#94603f","#35190c"],cf:["#835030","#1f0f06"],gn:["#78c960","#256b2a"],pt:["#fae7b9","#d2a865"]};
+GR.gr=["#5e8c45","#14260f"];
+document.body.insertAdjacentHTML("afterbegin",`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${Object.entries(GR).map(([k,[a,b]])=>`<radialGradient id="g_${k}" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient>`).join("")}</defs></svg>`);
+const u=g=>`url(#g_${g})`;
+const st=`<g class="steam" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"><path d="M40 34q-6-7 0-13t0-10"/><path d="M58 32q-6-7 0-13t0-10"/></g>`;
+const sh=`<ellipse cx="50" cy="90" rx="32" ry="5" fill="#000" opacity=".2"/>`;
+const pl=`<ellipse cx="50" cy="82" rx="46" ry="13" fill="#000" opacity=".16"/><ellipse cx="50" cy="77" rx="46" ry="14" fill="${u("pl")}"/><ellipse cx="50" cy="76" rx="34" ry="9" fill="#e6dfcb"/><ellipse cx="50" cy="75" rx="32" ry="8" fill="#fbf8ee"/>`;
+const gr=(n,cx,cy,rx,ry,c)=>Array.from({length:n},(_,i)=>{const a=i*2.4,r=Math.sqrt(i/n),x=(cx+Math.cos(a)*rx*r).toFixed(1),y=(cy+Math.sin(a)*ry*r).toFixed(1);return`<ellipse cx="${x}" cy="${y}" rx="2.4" ry="1.1" fill="${c}" opacity=".8"/>`}).join("");
+const dt=(g,x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><ellipse rx="15" ry="27" fill="${u(g)}"/><path d="M-8 -14Q-2 -6 -9 2M6 -16Q12 -4 7 8M-4 12Q4 16 0 22M-10 14Q-6 18 -8 22" stroke="#000" stroke-opacity=".28" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="-6" cy="-10" rx="3" ry="9" fill="#fff" opacity=".38"/><circle cy="-26" r="3" fill="#2a1a0c"/></g>`;
+const dates=g=>S(sh+dt(g,32,58,-24,.9)+dt(g,68,56,22,.9)+dt(g,50,50,0,1.05));
+const alm=(x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0 -28C18 -16 20 16 0 28 -20 16 -18 -16 0 -28Z" fill="${u("al")}"/><path d="M0 -24Q8 0 0 24" stroke="#6b3f1a" stroke-opacity=".4" stroke-width="1.5" fill="none"/><path d="M-9 -4L-6 0M8 6L11 10M-10 10L-7 13" stroke="#6b3f1a" stroke-opacity=".35" stroke-width="1.5"/><ellipse cx="-7" cy="-8" rx="3" ry="9" fill="#fff" opacity=".4"/></g>`;
+const cas=(x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M-24 -14C0 -30 28 -10 22 20 20 28 10 28 10 20 12 4 -4 -6 -20 -2 -26 -4 -26 -10 -24 -14Z" fill="${u("ca")}"/><path d="M-18 -12C2 -22 18 -8 16 14" stroke="#fff" stroke-width="3" fill="none" opacity=".5" stroke-linecap="round"/><path d="M-6 -8C6 -6 12 2 12 12" stroke="#b58a45" stroke-opacity=".4" stroke-width="1.5" fill="none"/></g>`;
+const pis=(x,y,r,s)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><ellipse rx="15" ry="21" fill="${u("ps")}"/><path d="M-12 -4Q0 -26 12 -4M-14 0Q0 -10 14 0" stroke="#a89363" stroke-width="1.5" fill="none"/><path d="M-9 -2Q0 -20 9 -2 9 14 0 19 -9 14 -9 -2Z" fill="${u("pg")}"/><ellipse cx="-3" cy="-4" rx="2.5" ry="6" fill="#fff" opacity=".4"/></g>`;
+const fig=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 -30C14 -30 28 -6 26 16 24 32 12 36 0 36 -12 36 -24 32 -26 16 -28 -6 -14 -30 0 -30Z" fill="${u("pu")}"/><path d="M0 -20V30M-10 -14Q-14 8 -8 28M10 -14Q14 8 8 28" stroke="#c48ad0" stroke-opacity=".5" stroke-width="1.5" fill="none"/><rect x="-3" y="-38" width="6" height="12" rx="3" fill="#7a5a2a"/><ellipse cx="-12" cy="-2" rx="4" ry="14" fill="#fff" opacity=".25"/></g>`;
+const lem=`<circle r="13" fill="#f2d44a"/><circle r="11" fill="#fff6b0"/>${[0,1,2,3,4,5].map(i=>`<path d="M0 0L${(9*Math.cos(i*1.047)).toFixed(1)} ${(9*Math.sin(i*1.047)).toFixed(1)}" stroke="#f2d44a" stroke-width="1.2"/>`).join("")}`;
+const ART={
+"Ajwa Dates":dates("dk"),"Medjool Dates":dates("br"),"Sukkari Dates":dates("go"),
+"Almonds":S(sh+alm(28,56,-28,.85)+alm(72,58,26,.85)+alm(50,50,0,1)),
+"Cashews":S(sh+cas(52,40,0,.95)+cas(56,78,180,.8)+cas(26,64,-60,.6)),
+"Pistachios":S(sh+pis(30,58,-22,.85)+pis(70,58,22,.85)+pis(50,50,0,1)),
+"Walnuts":S(sh+`<circle cx="36" cy="60" r="24" fill="${u("wa")}"/><path d="M36 36V84M22 46Q30 54 24 64M50 46Q42 54 48 64M28 76Q36 70 44 76" stroke="#6a4220" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="26" cy="48" rx="4" ry="8" fill="#fff" opacity=".3"/><circle cx="68" cy="52" r="20" fill="${u("wa")}"/><path d="M68 32Q60 44 68 52T68 72M56 40Q62 46 58 56M80 40Q74 46 78 56" stroke="#6a4220" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="44" rx="3" ry="7" fill="#fff" opacity=".3"/>`),
+"Dried Apricots":S(sh+[[36,58,22],[66,56,20]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${u("or")}"/><circle cx="${x+6}" cy="${y-4}" r="${r*.5}" fill="${u("rd")}" opacity=".35"/><path d="M${x} ${y-r}Q${x-6} ${y} ${x} ${y+r}" stroke="#b5600e" stroke-width="2.5" fill="none"/><ellipse cx="${x-9}" cy="${y-8}" rx="4" ry="8" fill="#fff" opacity=".35"/>`).join("")+`<path d="M44 34Q54 18 64 30 54 38 44 34Z" fill="${u("gn")}"/>`),
+"Figs":S(sh+fig(38,52,.95)+`<g transform="translate(70 62)"><ellipse rx="18" ry="22" fill="${u("pu")}"/><ellipse rx="14" ry="18" fill="${u("rd")}"/><ellipse rx="8" ry="11" fill="#f3b3a6"/>${[[-4,-6],[4,-4],[0,2],[-5,4],[5,6],[0,-10]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="1" fill="#f6e6a0"/>`).join("")}</g>`),
+"Raisins":S(sh+[[28,62],[46,52],[66,60],[38,76],[58,76],[50,64],[76,74],[22,78],[70,46]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="11" ry="8" fill="${u("rs")}"/><path d="M${x-7} ${y-1}Q${x-3} ${y-4} ${x} ${y}T${x+7} ${y+1}" stroke="#1a0814" stroke-opacity=".4" stroke-width="1" fill="none"/><ellipse cx="${x-4}" cy="${y-3}" rx="3" ry="1.6" fill="#fff" opacity=".35"/>`).join("")),
+"Gift Box":S(sh+`<rect x="14" y="46" width="72" height="40" rx="4" fill="${u("gr")}"/><path d="M24 54l8 8-8 8-8-8zM44 70l8 8-8 8M68 56l8 8-8 8" stroke="#e0ab45" stroke-opacity=".5" fill="none"/><rect x="10" y="34" width="80" height="16" rx="4" fill="#3a6a2a"/><rect x="10" y="34" width="80" height="5" rx="2" fill="#fff" opacity=".15"/><rect x="44" y="34" width="12" height="52" fill="${u("gd")}"/><path d="M50 34C32 8 14 24 36 34ZM50 34C68 8 86 24 64 34Z" fill="${u("gd")}"/><circle cx="50" cy="33" r="5" fill="#b87d12"/><ellipse cx="42" cy="26" rx="3" ry="2" fill="#fff" opacity=".5"/>`),
+"Lamb Mandi":S(pl+`<path d="M18 74Q50 18 82 74Q50 82 18 74Z" fill="${u("ri")}"/>`+gr(50,50,62,26,10,"#c98a2a")+`<rect x="32" y="40" width="19" height="13" rx="6" fill="${u("me")}"/><rect x="50" y="36" width="19" height="13" rx="6" fill="${u("me")}"/><rect x="41" y="50" width="17" height="12" rx="6" fill="${u("me")}"/><path d="M36 44l8 4M54 40l8 4M45 54l7 3" stroke="#2a0f06" stroke-width="1.5" opacity=".5"/><circle cx="30" cy="62" r="2.5" fill="#d9a441"/><circle cx="68" cy="60" r="2.5" fill="#8a3a2a"/><path d="M64 54Q70 48 74 54 68 58 64 54Z" fill="${u("gn")}"/>`+st),
+"Chicken Kabsa":S(pl+`<path d="M18 74Q50 24 82 74Q50 82 18 74Z" fill="${u("rb")}"/>`+gr(44,50,64,26,10,"#8a4410")+`<g transform="translate(46 46) rotate(-20)"><ellipse rx="15" ry="9" fill="${u("me")}"/><ellipse cx="-4" cy="-3" rx="6" ry="2.5" fill="#fff" opacity=".3"/><rect x="12" y="-2.5" width="14" height="5" rx="2.5" fill="#f4ead2"/><circle cx="27" cy="-3" r="3" fill="#f4ead2"/><circle cx="27" cy="3" r="3" fill="#f4ead2"/></g><circle cx="66" cy="62" r="5" fill="${u("rd")}"/><circle cx="30" cy="62" r="2.5" fill="#d9a441"/><circle cx="36" cy="66" r="2" fill="#4a2340"/>`+st),
+"Mixed Grill":S(sh+`<g transform="rotate(-8 50 50)"><line x1="6" y1="40" x2="94" y2="40" stroke="#b9b9b9" stroke-width="2.5"/><line x1="6" y1="64" x2="94" y2="64" stroke="#b9b9b9" stroke-width="2.5"/><rect x="14" y="32" width="38" height="16" rx="8" fill="${u("me")}"/><path d="M24 33v14M34 33v14M44 33v14" stroke="#2a0f06" stroke-opacity=".5" stroke-width="2"/><rect x="56" y="33" width="14" height="14" rx="4" fill="${u("rd")}"/><rect x="72" y="34" width="12" height="12" rx="6" fill="${u("gn")}"/><rect x="14" y="56" width="14" height="14" rx="4" fill="${u("rb")}"/><rect x="30" y="56" width="14" height="14" rx="4" fill="${u("rd")}"/><circle cx="55" cy="63" r="7" fill="#e6c9f0"/><circle cx="55" cy="63" r="3.5" fill="#fff" opacity=".5"/><rect x="66" y="56" width="14" height="14" rx="4" fill="${u("rb")}"/></g>`+st),
+"Falafel Wrap":S(sh+`<g transform="rotate(-14 50 55)"><path d="M28 90L34 44H66L72 90Z" fill="${u("pt")}"/><path d="M32 60H68L66 72H34Z" fill="#c0442a" opacity=".85"/><path d="M34 76H68" stroke="#fff" stroke-opacity=".6" stroke-width="2"/><path d="M26 46Q32 30 40 38 46 26 54 36 62 28 68 42 72 46 50 54 26 46Z" fill="${u("gn")}"/><circle cx="44" cy="40" r="6" fill="${u("ch")}"/><circle cx="57" cy="38" r="5.5" fill="${u("ch")}"/><circle cx="43" cy="38" r="1" fill="#e6c08a"/><path d="M36 48Q50 54 64 48" stroke="#fff" stroke-width="2.5" fill="none" opacity=".8"/></g>`),
+"Shawarma Plate":S(pl+`<path d="M22 72Q36 44 62 66Z" fill="${u("me")}"/><path d="M30 66Q46 46 66 64Z" fill="#d9a15f"/><path d="M36 62Q50 50 64 62" stroke="#8a5a2a" stroke-width="2" fill="none"/><g fill="${u("go")}">${[[60,16],[68,30],[54,6],[74,40]].map(([x,r])=>`<rect x="${x}" y="48" width="5" height="24" rx="2.5" transform="rotate(${r} ${x+2} 60)"/>`).join("")}</g><circle cx="34" cy="62" r="6" fill="${u("rd")}"/><ellipse cx="46" cy="70" rx="7" ry="3" fill="#fff" opacity=".9"/><circle cx="76" cy="66" r="3" fill="${u("gn")}"/>`),
+"Hummus & Bread":S(sh+`<path d="M60 56L92 30 88 66Z" fill="${u("pt")}"/><path d="M64 60L82 42" stroke="#b8894a" stroke-opacity=".5" stroke-width="2"/><path d="M52 84L84 78 86 52Z" fill="${u("pt")}" opacity=".0"/><ellipse cx="44" cy="68" rx="38" ry="15" fill="${u("pl")}"/><ellipse cx="44" cy="65" rx="33" ry="11" fill="${u("cr")}"/><path d="M20 65Q44 55 68 65" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/><ellipse cx="44" cy="65" rx="14" ry="4" fill="none" stroke="#c89a1c" stroke-width="2.5"/>${[[30,62],[58,68],[40,70],[52,60]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2" fill="#a52a1a"/>`).join("")}<circle cx="44" cy="65" r="3.5" fill="${u("ps")}"/><path d="M40 62Q44 56 48 62 44 66 40 62Z" fill="${u("gn")}"/>`),
+"Lentil Soup":S(sh+`<path d="M12 54H88Q86 88 50 88 14 88 12 54Z" fill="${u("pl")}"/><ellipse cx="50" cy="54" rx="38" ry="10" fill="#e0d9c4"/><ellipse cx="50" cy="55" rx="34" ry="8" fill="${u("so")}"/><path d="M24 56Q36 50 50 56T76 54" stroke="#fff" stroke-opacity=".45" stroke-width="2" fill="none"/><path d="M60 50Q70 46 76 54 66 58 60 50Z" fill="${u("gl")}" opacity="0"/><g transform="translate(66 52)">${lem}</g><path d="M34 52Q40 46 46 52 40 56 34 52Z" fill="${u("gn")}"/><ellipse cx="22" cy="68" rx="3" ry="9" fill="#fff" opacity=".5"/>`+st),
+"Date Pudding":S(pl+`<path d="M20 70L28 44H72L80 70Z" fill="${u("ch")}"/><path d="M22 62H78M24 54H76" stroke="#d6a05a" stroke-width="2.5" opacity=".55"/><path d="M26 46Q50 36 74 46Q74 52 66 52 64 62 58 54 52 66 46 54 40 62 36 52 28 54 26 46Z" fill="${u("gd")}"/><ellipse cx="50" cy="38" rx="9" ry="12" fill="${u("dk")}"/><ellipse cx="47" cy="34" rx="2" ry="5" fill="#fff" opacity=".4"/><ellipse cx="72" cy="40" rx="8" ry="6" fill="#fff6e0"/><path d="M12 76Q22 70 30 76M70 78Q80 72 90 76" stroke="${"#c8802b"}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`),
+"Kunafa":S(pl+`<path d="M22 66L30 46H74L80 66Q50 74 22 66Z" fill="${u("gd")}"/><path d="M22 66Q50 74 80 66V70Q50 78 22 70Z" fill="#b87d12"/>${Array.from({length:14},(_,i)=>`<path d="M${30+i*3.4} 48Q${33+i*3.4} 56 ${28+i*3.8} 66" stroke="#b86a10" stroke-opacity=".45" stroke-width="1.2" fill="none"/>`).join("")}<ellipse cx="42" cy="50" rx="10" ry="2.5" fill="#fff" opacity=".4"/>${[[36,52],[48,50],[60,54],[68,50],[54,58],[40,60]].map(([x,y])=>`<rect x="${x}" y="${y}" width="4" height="2.5" rx="1" fill="#7bab2e" transform="rotate(${x*7%90} ${x} ${y})"/>`).join("")}`),
+"Arabic Coffee":S(`<ellipse cx="50" cy="86" rx="40" ry="8" fill="#000" opacity=".15"/><ellipse cx="46" cy="80" rx="36" ry="8" fill="${u("pl")}"/><path d="M26 44H66Q66 76 46 76T26 44Z" fill="${u("pl")}"/><path d="M66 50Q82 50 80 62T64 66" stroke="#efe9d8" stroke-width="5" fill="none"/><ellipse cx="46" cy="44" rx="20" ry="5" fill="#d9d1bb"/><ellipse cx="46" cy="44.5" rx="17" ry="3.8" fill="${u("cf")}"/><path d="M30 58Q46 66 62 58" stroke="#c8902b" stroke-width="2" fill="none"/><ellipse cx="34" cy="56" rx="2.5" ry="9" fill="#fff" opacity=".5"/><ellipse cx="84" cy="84" rx="6" ry="9" fill="${u("dk")}" transform="rotate(30 84 84)"/><ellipse cx="14" cy="84" rx="4" ry="2.5" fill="${u("pg")}"/>`+st),
+"Mint Lemonade":S(sh+`<path d="M24 24H76L70 88Q50 92 30 88Z" fill="${u("gl")}" opacity=".55"/><path d="M26 38H74L70 88Q50 92 30 88Z" fill="${u("le")}"/><rect x="36" y="52" width="14" height="14" rx="3" fill="#fff" opacity=".45" transform="rotate(12 43 59)"/><rect x="52" y="66" width="14" height="14" rx="3" fill="#fff" opacity=".4" transform="rotate(-10 59 73)"/><path d="M70 6L60 60" stroke="#e5484d" stroke-width="4"/><path d="M68 14L66 24M65 30L63 40" stroke="#fff" stroke-width="4"/><g transform="translate(70 28)">${lem}</g><path d="M30 24Q22 8 36 8 38 20 30 24ZM42 24Q42 6 54 8 52 20 42 24Z" fill="${u("gn")}"/><path d="M33 22Q34 14 36 10" stroke="#1d5a22" stroke-width="1" fill="none"/><ellipse cx="32" cy="58" rx="2.5" ry="14" fill="#fff" opacity=".6"/><circle class="bub" cx="40" cy="80" r="3" fill="#fff" opacity=".6"/><circle class="bub" cx="56" cy="76" r="2.5" fill="#fff" opacity=".6"/>`)};
+function render(){
+const d=DATA[sec];$("title").textContent=d.title;$("intro").textContent=d.intro;
+const cats=["All",...new Set(d.items.map(i=>i[4]))];
+$("chips").innerHTML=cats.map(c=>`<button class="chip" aria-pressed="${c==cat}" data-c="${c}">${c}</button>`).join("");
+$("grid").className="grid"+(fresh?" enter":"");fresh=false;
+$("grid").innerHTML=d.items.map((it,i)=>cat!="All"&&it[4]!=cat?"":`<div class="item" style="--i:${i}"><div class="art">${ART[it[0]]||it[1]}</div><h3>${it[0]}</h3><p>${it[2]}</p><div class="row"><span class="price">${money(it[3])}</span>${ctl(key(sec,i))}</div></div>`).join("");
+document.querySelectorAll(".door").forEach(b=>b.setAttribute("aria-selected",b.dataset.s==sec));
+const c=Object.values(cart).reduce((a,b)=>a+b,0);if(+$("cnt").textContent!=c){const b=$("openCart");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}$("cnt").textContent=c;}
+function find(k){const[s,i]=k.split(":");const it=DATA[s].items[i];return{name:it[0],price:it[3],s}}
+function ctl(k){return cart[k]?`<div class="qty"><button data-m="${k}" aria-label="Remove one">−</button><b>${cart[k]}</b><button data-p="${k}" aria-label="Add one">+</button></div>`:`<button class="add" data-p="${k}">Add</button>`}
+function change(k,n){cart[k]=(cart[k]||0)+n;if(cart[k]<=0)delete cart[k];render();if($("drawer").classList.contains("open"))drawer()}
+const subtotal=()=>Object.entries(cart).reduce((a,[k,q])=>a+find(k).price*q,0);
+function drawer(err=""){
+const ks=Object.keys(cart),p=$("panel"),close=`<button class="chip" id="close">Close</button>`;
+if(step=="done"){p.innerHTML=`<div>${close}</div><div class="done"><div class="ico">✅</div><h2>One last step</h2><p>Your order is ready in WhatsApp. Tap <b>Send</b> there to confirm it with Ajwa.</p><p><a class="place" style="display:block;text-decoration:none" href="${waUrl}" target="_blank" rel="noopener">Open WhatsApp</a></p></div>`;$("close").onclick=()=>{step="cart";$("drawer").classList.remove("open")};return}
+if(!ks.length){p.innerHTML=`<div>${close}</div><h2>Your cart is empty</h2><p class="intro">Add dry fruits or a meal to get started.</p>`;$("close").onclick=shut;return}
+const fee=mode=="Delivery"?3:0;
+p.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h2>Your order</h2>${close}</div>`+
+ks.map(k=>{const f=find(k);return`<div class="line"><div>${f.name}<br><small class="intro">${money(f.price)} · ${f.s=="shop"?"Dry fruits":"Restaurant"}</small></div><div class="qty"><button data-m="${k}" aria-label="Remove one">−</button><b>${cart[k]}</b><button data-p="${k}" aria-label="Add one">+</button></div></div>`}).join("")+
+`<label>How do you want it?</label><div class="seg">${["Pickup","Delivery","Dine in"].map(m=>`<button data-mode="${m}" aria-pressed="${m==mode}">${m}</button>`).join("")}</div>
+<label for="n">Name</label><input id="n" autocomplete="name">
+<label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel">
+${mode=="Delivery"?`<label for="ad">Delivery address</label><textarea id="ad" rows="2"></textarea>`:""}
+<label for="nt">Notes (optional)</label><input id="nt" placeholder="Allergies, spice level…">
+<div class="line"><span>Subtotal</span><span>${money(subtotal())}</span></div>
+${fee?`<div class="line"><span>Delivery</span><span>${money(fee)}</span></div>`:""}
+<div class="total"><span>Total</span><span>${money(subtotal()+fee)}</span></div>
+<div class="err" id="err">${err}</div><button class="place" id="place">Place order</button>`;
+$("close").onclick=shut;
+$("place").onclick=()=>{const n=$("n").value.trim(),ph=$("ph").value.trim(),ad=$("ad")?$("ad").value.trim():"x";
+if(!n||ph.length<6||!ad){$("err").textContent="Enter your name, a phone number"+(mode=="Delivery"?" and delivery address.":".");return}
+const nt=$("nt").value.trim();
+const lines=Object.entries(cart).map(([k,q])=>`• ${find(k).name} x${q} = ${money(find(k).price*q)}`).join("\n");
+const msg=`New order – Ajwa\n\n${lines}\n\nType: ${mode}\nTotal: ${money(subtotal()+fee)}\n\nName: ${n}\nPhone: ${ph}`+(mode=="Delivery"?`\nAddress: ${ad}`:"")+(nt?`\nNotes: ${nt}`:"");
+waUrl="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+cart={};step="done";render();drawer();window.open(waUrl,"_blank")}}
+function shut(){$("drawer").classList.remove("open")}
+document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;
+if(t.dataset.s){sec=t.dataset.s;cat="All";fresh=true;render()}
+else if(t.dataset.c){cat=t.dataset.c;fresh=true;render()}
+else if(t.dataset.p)change(t.dataset.p,1);
+else if(t.dataset.m)change(t.dataset.m,-1);
+else if(t.dataset.mode){const v=[$("n"),$("ph"),$("nt")].map(x=>x.value);mode=t.dataset.mode;drawer();[$("n"),$("ph"),$("nt")].forEach((x,i)=>x.value=v[i])}});
+$("openCart").onclick=()=>{step="cart";drawer();$("drawer").classList.add("open")};
+$("scrim").onclick=shut;
+render();
+$("float").innerHTML=["Ajwa Dates","Almonds","Figs","Pistachios","Sukkari Dates","Walnuts","Dried Apricots","Cashews"].map((k,i)=>`<div class="fl" style="left:${6+i*12}%;width:${46+(i%3)*14}px;animation-duration:${9+i%4*3}s;animation-delay:${-i*2.2}s">${ART[k]}</div>`).join("");
+</script></body></html>
